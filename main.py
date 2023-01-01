@@ -11,11 +11,18 @@
 # gistから移行。
 #---------------------------------
 
+from common import AppParams
+
+
 # 終了コード -------
 APP_SUCCESS=0	# 成功時
 APP_ERROR=1		# エラー終了時
 
+def setup() -> AppParams
 
+    params = AppParams()
+
+    return params
 
 def main() -> int:
     """エントリーポイント
@@ -41,13 +48,12 @@ def main() -> int:
         # 処理の開始をログに吐く。
         # Loggerは外部提供ライブラリをラッパーしたものをイメージ。必要なければラッパーじゃなくていい。
         # ※ ログ出力は現代開発なら、なんかaspect的なスマートな方法があるとおもう。
-        Logger.info('***** プログラム名 > hogeデータの作成 - 開始')
+        # Logger.info('***** プログラム名 > hogeデータの作成 - 開始')
         
         # ~ 別モジュールに定義された処理を実行 ~ 
         # こんな感じ
-        myproc.execute()
+        #myproc.execute()
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-
     
     # 最上位クラスでキャッチするので、キャッチ漏れはない。。。はず。
     # 詳細を調べておくこと
@@ -56,7 +62,7 @@ def main() -> int:
         # エラー内容をログに出力
         # > スタックトレースを含めて、例外インスタンスを渡さなくても、
         # > ラッパーが補足して処理してくれてる感じ。たしかloggingモジュールで実装されている。
-        Logger.exception('プログラム名 > hogeデータの作成実行中にエラーが発生しました。')
+        # Logger.exception('プログラム名 > hogeデータの作成実行中にエラーが発生しました。')
         
         # 終了コードを「エラー終了」に設定
         exit_code = APP_ERROR    
@@ -67,8 +73,8 @@ def main() -> int:
         # ただし、Logger生成が必須なので、生成されていない場合は、
         # コンソールに吐くような仕組みが必要。
         # ※ その他補足は処理の開始をログに吐いてるところと一緒。
-        if Logger is not None
-        	Logger.info('***** プログラム名 > hogeデータの作成 - 終了')
+        # if Logger is not None
+        	# Logger.info('***** プログラム名 > hogeデータの作成 - 終了')
     	
         return exit_code
 
