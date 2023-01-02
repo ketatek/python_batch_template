@@ -18,11 +18,15 @@ from common import AppParams
 APP_SUCCESS=0	# 成功時
 APP_ERROR=1		# エラー終了時
 
-def setup() -> AppParams
+def setup() -> Settings, AppParams
+    
+    # アプリケーション設定
+    # settings = Settings()
 
+    # 起動パラメタ
     params = AppParams()
 
-    return params
+    return None, params
 
 def main() -> int:
     """エントリーポイント
@@ -43,7 +47,7 @@ def main() -> int:
     try:
         
         # 起動パラメタなどをここで処理
-        app_params = setup()
+        settings, app_params = setup()
         
         # 処理の開始をログに吐く。
         # Loggerは外部提供ライブラリをラッパーしたものをイメージ。必要なければラッパーじゃなくていい。
@@ -55,7 +59,7 @@ def main() -> int:
         #myproc.execute()
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
     
-    # 最上位クラスでキャッチするので、キャッチ漏れはない。。。はず。
+    # Exceptinでキャッチするので、キャッチ漏れはない。。。はず。
     # 詳細を調べておくこと
     except Exception as e:
         	
