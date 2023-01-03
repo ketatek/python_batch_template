@@ -1,0 +1,21 @@
+setting_a = "test"
+setting_b = 100
+setting_c = true
+setting_d = 2023-01-01T00:00:00+09:00
+setting_e = 2023-01-02
+setting_f = [1, 2, 3, 4, 5]
+
+[table_a]
+setting_g.name="hoge"
+setting_g.age=12
+setting_h = {year="2023", month="01, day="01"}
+
+[[table_b]]
+setting_i = "test_02"
+setting_j = 101.01
+setting_k = 2023-01-02
+
+[[table_b]]
+setting_i = "test_03"
+setting_j = 102.02
+setting_k = 2023-01-02
