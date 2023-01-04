@@ -5,8 +5,7 @@
 #-----------------------------------------
 import tomllib
 from pprint import pprint
-
-
+import utils
 
 class AppSettings():
 """
@@ -21,14 +20,11 @@ issue:
 * globalな設定を前提とするため、singltonな形式で提供したい。
 * validaterの実装が必要。
 """
-
-
-
     
 
     def get_settings_path(path: str) -> str:
         
-        ret = ""
+        ret = str(utils.get_root_path() / 'config' / 'settings.toml')
 
         if path is not None:
             ret = path
