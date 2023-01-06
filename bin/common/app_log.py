@@ -14,6 +14,7 @@
 
 import datetime
 import functool
+import logging
 
 def entry_log(prog_name:str):
     """バッチエントリーポイントでの実行ログ
@@ -27,20 +28,26 @@ def entry_log(prog_name:str):
         prog_name (str): コードの論理名。
     """
 
-    def _entry_log(func):
+def _entry_log(func):
 
-        @functool.wraps(fun)
-        def _wrapper(*args, **keywords):
+    @functool.wraps(fun)
+    def _wrapper(*args, **keywords):
+        
+        logger = getLogger()
+
+        try:
             
-            logger = getLogger()
-
             logger.info(f'***** {prog_name} > 開始 *****')
+
             result = func(*args, **keywords)
+
+        finally:
+
             logger.info(f'***** {prog_name} > 終了 *****')
             
-            return result
+        return result
 
-        return _wrapper
+    return _wrapper
 
 
 def exec_log(func_name: str):

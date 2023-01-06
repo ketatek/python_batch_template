@@ -11,23 +11,27 @@
 # gistから移行。
 #---------------------------------
 
-from common import AppParams
-
+from common import AppParamsd
+from common import AppSettings
+import common.app_log as app_log
 
 # 終了コード -------
 APP_SUCCESS=0	# 成功時
 APP_ERROR=1		# エラー終了時
 
+@app_log.entry_log('事前セットアップ')
 def setup() -> Settings, AppParams
     
     # アプリケーション設定
-    # settings = Settings()
+    settings = AppSettings()
 
     # 起動パラメタ
     params = AppParams()
 
-    return None, params
+    return settings, params
 
+# 
+@app_log.entry_log('Pythonバッチテンプレート')
 def main() -> int:
     """エントリーポイント
     終了コードは基本的には、0 or 1。
@@ -48,12 +52,7 @@ def main() -> int:
         
         # 起動パラメタなどをここで処理
         settings, app_params = setup()
-        
-        # 処理の開始をログに吐く。
-        # Loggerは外部提供ライブラリをラッパーしたものをイメージ。必要なければラッパーじゃなくていい。
-        # ※ ログ出力は現代開発なら、なんかaspect的なスマートな方法があるとおもう。
-        # Logger.info('***** プログラム名 > hogeデータの作成 - 開始')
-        
+
         # ~ 別モジュールに定義された処理を実行 ~ 
         # こんな感じ
         #myproc.execute()
@@ -70,16 +69,7 @@ def main() -> int:
         
         # 終了コードを「エラー終了」に設定
         exit_code = APP_ERROR    
-        
-    finally:
-        
-        # 処理の終了をログに吐く。finallyに実装することで、必ず吐かれる。
-        # ただし、Logger生成が必須なので、生成されていない場合は、
-        # コンソールに吐くような仕組みが必要。
-        # ※ その他補足は処理の開始をログに吐いてるところと一緒。
-        # if Logger is not None
-        	# Logger.info('***** プログラム名 > hogeデータの作成 - 終了')
-    	
+            	
         return exit_code
 
 # __name__== 'main'で
